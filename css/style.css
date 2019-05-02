@@ -1,0 +1,173 @@
+body {
+    background : #969696;
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 1px solid #003da0;
+}
+
+h1, h2, .produs  {
+    color: #003da0;
+}
+
+.container {
+    padding: 1em;
+    width: 21cm;
+    margin: auto;
+    border-radius: 4px;
+    background : #fdfdfd;
+    min-height: 100vh;
+}
+
+.ib {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
+    margin: auto;    
+}
+
+.lista {
+    list-style-type: none;
+    padding-left: 0;
+    width: 300px;
+}
+
+.produs {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.produs img {
+    display: block;
+}
+
+.produs div {
+    text-align: center;
+}
+
+.name {
+    font: 20px Verdana;
+    padding: 2px;
+    width: 300px;
+}
+
+.price,
+.currency {
+    font: 20px Verdana;
+    padding: 2px;
+
+}
+
+.add {
+    display: block;
+    margin: 3px auto;
+    height: 24px;
+    width: 140px;
+    border-radius: 5px;
+    background: linear-gradient(#1a7fde, #1461a9);
+    color: white;
+    box-shadow: 1px 1px 3px #888;
+    font: 16px Verdana;
+    text-align: center;
+
+}
+
+.add:hover {
+    cursor:pointer;
+    background: linear-gradient(#1461a9, #1461a9);
+}
+
+.cos {
+    width: calc(100% - 320px);
+}
+
+.cos table {
+    border-collapse: collapse;
+    width: 100%;
+    font: 10px Verdana;
+}
+
+.cos thead {
+    background-color: #777777;
+    color: #fff;
+}
+
+.cos th:not(:last-child) {
+    border-right: 1.5px solid #fff;
+}
+
+.cos th {
+    font-weight: bold;
+}
+
+.cos tbody td:not(:last-child) {
+    border-right: 1.5px solid #aaa;
+}
+
+.cos tbody tr {
+    border-bottom: 1.5px solid #aaa;
+}
+.cos td,
+.cos th {
+    padding: 5px;
+}
+
+.cos .name {
+    font: 10px Verdana;
+}
+
+th:first-child,
+td:first-child {
+    text-align: left;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+    text-align: center;
+    width: 65px;
+}
+
+.cos input {
+    width: 40px;
+    text-align: center;
+}
+
+th:nth-child(3),
+th:nth-child(4),
+td:nth-child(3),
+td:nth-child(4) {
+    width: 120px;
+    text-align: right;
+}
+// {
+    //     name: "Ochiuri",
+    //     price: 15.75,
+    //     image: "img/ochiuri.jpg"
+    // },
+tfoot {
+    font-weight: bold;
+}
+
+tfoot .total {
+    text-align: right;
+}
+
+.pret::after,
+.total::after {
+    content:" RON";
+}
+
+.remove {
+    color: #1461a9;    
+}
+
+.remove:hover {
+    cursor: pointer;
+}
