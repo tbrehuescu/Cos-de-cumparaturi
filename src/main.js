@@ -10,14 +10,8 @@ data.items.forEach(function(item) {
 
     products.appendChild(clone);
 });
+// initial sort is sortPriceAscending
+sort();
 
-var items = document.querySelector("#data").getElementsByTagName("li");
-items.sort(sortNumeCrescator);
-
-function sortNumeCrescator(a, b) {
-    return 2 * 
-            (a.querySelector(".produs").querySelector(".name")
-            > 
-            b.querySelector(".produs").querySelector(".name"))
-             -1;
-};
+// tack 1.4
+var sortList = document.querySelector("#sortare").addEventListener("change", sort);
