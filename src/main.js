@@ -10,3 +10,14 @@ data.items.forEach(function(item) {
 
     products.appendChild(clone);
 });
+
+var items = document.querySelector("#data").getElementsByTagName("li");
+items.sort(sortNumeCrescator);
+
+function sortNumeCrescator(a, b) {
+    return 2 * 
+            (a.querySelector(".produs").querySelector(".name")
+            > 
+            b.querySelector(".produs").querySelector(".name"))
+             -1;
+};
