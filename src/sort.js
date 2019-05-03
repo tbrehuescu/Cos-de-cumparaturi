@@ -30,6 +30,7 @@ function restoreItemsList(items) {
     var parentItems = items[0].parentNode;
     for (var i in items) {
         var detachedItem = parentItems.removeChild(items[i]);
+        items[i].querySelector(".produs").querySelector(".add").setAttribute("data-index", i);
         parentItems.appendChild(items[i]);
     }
 }
