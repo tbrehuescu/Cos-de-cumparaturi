@@ -37,10 +37,16 @@ function alreadyInBasket(item) {
 function updateQuantity(item) {
     for (var i = 0; i < basketItems.length; i++) {
         if (basketItems[i].querySelector(".name").innerHTML == item.querySelector(".produs").querySelector(".name").innerHTML) {
-            var currentQuantity = basketItems[i].querySelector(".cantitate").getAttribute("value");
-            basketItems[i].querySelector(".cantitate").setAttribute("value", parseInt(currentQuantity) + 1);
+            if (event.type == "change") {
+                basketItems[i].querySelector(".cantitate").setAttribute("value", parseInt(basketItems[i].querySelector(".cantitate").value));   
+                basketItems[i].querySelector(".cantitate").innerHTML = basketItems[i].querySelector(".cantitate").value;
+            }
+            if (event.type == "click") {
+                basketItems[i].querySelector(".cantitate").value = parseInt(basketItems[i].querySelector(".cantitate").value) + 1;            
+                basketItems[i].querySelector(".cantitate").innerHTML = basketItems[i].querySelector(".cantitate").getAttribute("value") + 1;
+            }
             basketItems[i].querySelector(".total").innerHTML = (parseFloat(item.querySelector(".produs").querySelector(".price").innerHTML) * 
-                                                                parseInt(basketItems[i].querySelector(".cantitate").getAttribute("value"))).toFixed(2); 
+                                                                parseInt(basketItems[i].querySelector(".cantitate").value)).toFixed(2); 
         }
     }
 }
@@ -51,6 +57,10 @@ function updateBasket(item) {
         clone.querySelector(".price").innerHTML = item.querySelector(".produs").querySelector(".price").innerHTML;
         clone.querySelector(".name").innerHTML = item.querySelector(".produs").querySelector(".name").innerHTML;
         clone.querySelector(".total").innerHTML = parseFloat(clone.querySelector(".price").innerHTML);
+        clone.querySelector(".cantitate").addEventListener("change", function() {
+            updateQuantity(item);
+        });
+        clone.querySelector(".remove").setAttribute("data-index", parseInt(basketItems.length) + 1);
         basket.appendChild(clone);
     } else {
         updateQuantity(item);
@@ -59,10 +69,7 @@ function updateBasket(item) {
 
 items.forEach(function(item) {
     item.querySelector(".produs").querySelector(".add").addEventListener("click", function() {
-        updateBasket(item)
+        updateBasket(item);
     });
 });
 
-// TODO: modificare basket cand adaug prin sageata
-// TODO: modificare basket cand modific de mana
-// TODO: data-index
