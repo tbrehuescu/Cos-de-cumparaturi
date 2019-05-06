@@ -1,4 +1,3 @@
-
 // task 1.3
 var productTemplate = document.getElementById("product-template");
 var products = document.getElementById("data");
@@ -16,6 +15,69 @@ sort();
 
 // task 1.4
 var sortList = document.querySelector("#sortare").addEventListener("change", sort);
+
+function sortNameAscending(a, b) {
+    
+    if (a.querySelector(".produs").querySelector(".name").innerHTML < b.querySelector(".produs").querySelector(".name").innerHTML) {
+        return -1;
+    } else if (a.querySelector(".produs").querySelector(".name").innerHTML > b.querySelector(".produs").querySelector(".name").innerHTML) {
+        return 1;
+    }
+    return 0;
+};
+
+function sortNameDescending(a, b) {
+    
+    if (a.querySelector(".produs").querySelector(".name").innerHTML > b.querySelector(".produs").querySelector(".name").innerHTML) {
+        return -1;
+    } else if (a.querySelector(".produs").querySelector(".name").innerHTML < b.querySelector(".produs").querySelector(".name").innerHTML) {
+        return 1;
+    }
+    return 0;
+};
+
+function sortPriceAscending(a, b) {    
+    return a.querySelector(".produs").querySelector(".price").innerHTML - b.querySelector(".produs").querySelector(".price").innerHTML;
+};
+
+function sortPriceDescending(a, b) {
+    return b.querySelector(".produs").querySelector(".price").innerHTML - a.querySelector(".produs").querySelector(".price").innerHTML;
+};
+
+function restoreItemsList(items) {
+    var parentItems = items[0].parentNode;
+    for (var i in items) {
+        var detachedItem = parentItems.removeChild(items[i]);
+        items[i].querySelector(".produs").querySelector(".add").setAttribute("data-index", i);
+        parentItems.appendChild(items[i]);
+    }
+}
+
+function getSortType() {
+    if (document.querySelector("#sortare").selectedOptions[0].value == "cmpNumeCrescator") {
+        return sortNameAscending;
+    }
+    if (document.querySelector("#sortare").selectedOptions[0].value == "cmpNumeDescrescator") {
+        return sortNameDescending;
+    }
+    if (document.querySelector("#sortare").selectedOptions[0].value == "cmpPretCrescartor") {
+        return sortPriceAscending;
+    }
+    if (document.querySelector("#sortare").selectedOptions[0].value == "cmpPretDescrescator") {
+        return sortPriceDescending;
+    }
+}
+
+function sort(type) {
+    var selItemsList = document.querySelector("#data").getElementsByTagName("li");
+    var items = Array.prototype.slice.call(selItemsList);
+    if (typeof type == "undefined") {
+        items.sort(sortPriceAscending);
+    } else {
+        items.sort(getSortType());
+    }
+    restoreItemsList(items);
+}
 
 // task 1.5
 var itemBasketTemplate = document.getElementById("item-basket-template");
@@ -49,6 +111,7 @@ function updateQuantity(item) {
                                                                 parseInt(basketItems[i].querySelector(".cantitate").value)).toFixed(2);          
         }
     }
+    updateTotal();
 }
 
 function updateBasket(item) {
@@ -65,10 +128,10 @@ function updateBasket(item) {
             deleteItem();
         })
         basket.appendChild(clone);
+        updateTotal();
     } else {
         updateQuantity(item);
     }
-    updateTotal();
 }
 
 items.forEach(function(item) {
@@ -85,13 +148,16 @@ function deleteItem() {
     for (var i = dataIndex; i <= basketItems.length; i++) {
         basketItems[i - 1].querySelector(".remove").setAttribute("data-index", i);
     }
+    updateTotal();
 }
 
 // task 1.7
 function updateTotal() {
-    var total = 0;;
+    var total = 0;
+    var totalBasket = document.querySelector("#total");
     basketItems = document.getElementById("items").getElementsByTagName("tr");
     for (var i = 0; i < basketItems.length; i++) {
-        console.log(basketItems[i].querySelector(".total"));
+        total += parseFloat(basketItems[i].querySelector(".total").innerHTML);
     }
+    totalBasket.innerHTML = total.toFixed(2);
 }
