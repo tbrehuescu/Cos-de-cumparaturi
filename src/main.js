@@ -61,6 +61,9 @@ function updateBasket(item) {
             updateQuantity(item);
         });
         clone.querySelector(".remove").setAttribute("data-index", parseInt(basketItems.length) + 1);
+        clone.querySelector(".remove").addEventListener("click", function() {
+            deleteItem();
+        })
         basket.appendChild(clone);
     } else {
         updateQuantity(item);
@@ -73,3 +76,12 @@ items.forEach(function(item) {
     });
 });
 
+// task 1.6
+function deleteItem() {
+    var dataIndex = event.target.getAttribute("data-index");
+    basketItems[dataIndex - 1].remove();
+    basketItems = document.getElementById("items").getElementsByTagName("tr");
+    for (var i = dataIndex; i <= basketItems.length; i++) {
+        basketItems[i - 1].querySelector(".remove").setAttribute("data-index", i);
+    }
+}
