@@ -46,7 +46,7 @@ function updateQuantity(item) {
                 basketItems[i].querySelector(".cantitate").innerHTML = basketItems[i].querySelector(".cantitate").getAttribute("value") + 1;
             }
             basketItems[i].querySelector(".total").innerHTML = (parseFloat(item.querySelector(".produs").querySelector(".price").innerHTML) * 
-                                                                parseInt(basketItems[i].querySelector(".cantitate").value)).toFixed(2); 
+                                                                parseInt(basketItems[i].querySelector(".cantitate").value)).toFixed(2);          
         }
     }
 }
@@ -68,6 +68,7 @@ function updateBasket(item) {
     } else {
         updateQuantity(item);
     }
+    updateTotal();
 }
 
 items.forEach(function(item) {
@@ -83,5 +84,14 @@ function deleteItem() {
     basketItems = document.getElementById("items").getElementsByTagName("tr");
     for (var i = dataIndex; i <= basketItems.length; i++) {
         basketItems[i - 1].querySelector(".remove").setAttribute("data-index", i);
+    }
+}
+
+// task 1.7
+function updateTotal() {
+    var total = 0;;
+    basketItems = document.getElementById("items").getElementsByTagName("tr");
+    for (var i = 0; i < basketItems.length; i++) {
+        console.log(basketItems[i].querySelector(".total"));
     }
 }
